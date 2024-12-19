@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/Images/icon.ico" />
+    <title>Portfolio - Erik Pádua</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+      footer {
+        bottom: 0;
+        position: fixed;
+      }
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+      /* Sidebar Styling */
+      .sidebar {
+        width: 60px;
+        background: linear-gradient(#333, #420249, #6956e5);
+        color: white;
+        transition: width 0.3s ease;
+        overflow: hidden;
+        position: relative;
+      }
+      .sidebar img {
+        width: 35px;
+        margin: 6px;
+        position: fixed;
+      }
+      .sidebar:hover img {
+        opacity: 0;
+      }
+      .sidebar:hover {
+        width: 300px;
+        border-radius: 0% 2% 2% 0%;
+      }
+      .sidebar-content {
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 20px 10px;
+        position: fixed;
+      }
+      .sidebar:hover .sidebar-content {
+        opacity: 1;
+      }
+
+      .sidebar:hover .sidebar-content img {
+        opacity: 1;
+      }
+
+      .sidebar-content h1 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .sidebar-content ul {
+        list-style-type: none;
+      }
+      .sidebar-content ul li {
+        margin: 5px;
+      }
+      .sidebar-content a {
+        color: #fff;
+        display: block;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .sidebar-content a img {
+        position: relative;
+        width: 30px;
+        bottom: -10px;
+        padding-right: 5px;
+      }
+      .sidebar-content a:hover {
+        font-size: large;
+        color: #c1bbbb;
+      }
+      .contact a {
+        display: inline;
+        margin-left: 10px;
+      }
+      .contact a:hover {
+        transition: border 0.3s ease;
+        border: 5px solid transparent;
+        border-radius: 10%;
+      }
+      /* Main Content Styling */
+      .main-content {
+        flex-grow: 1;
+        padding: 20px;
+      }
+      .home-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        color: white;
+      }
+      .home-content {
+        max-width: 1200px;
+        background-color: #333;
+        padding: 40px;
+        border-radius: 15px;
+      }
+      .home-content h1 {
+        display: inline-block;
+        position: relative;
+        bottom: 160px;
+        left: 10px;
+        font-size: 3rem;
+      }
+      .home-content h3 {
+        display: inline-block;
+        position: relative;
+        bottom: 160px;
+        left: 220px;
+        max-width: 800px;
+        font-size: 1.3rem;
+      }
+      .home-content img {
+        border: 3px solid #fff;
+        width: 200px;
+      }
+      .home-content p {
+        position: relative;
+        bottom: 60px;
+        font-size: 1.1rem;
+        text-align: start;
+      }
+      .home-content a img {
+        position: relative;
+        display: inline;
+        width: 50px;
+        bottom: -10px;
+        padding-right: 5px;
+        margin-right: 20px;
+        border: none;
+      }
+      .header {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
+      .first {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 0;
+        margin-bottom: 3rem;
+      }
+      .block-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .block-container-skill {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .block-container-skill img {
+        width: 30px;
+        height: 30px;
+      }
+      .block {
+        background-color: white;
+        border-radius: 10px;
+        text-align: center;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .block p {
+        text-align: left;
+      }
+      .cta-button {
+        display: inline-block;
+        background-color: #420249;
+        color: #fff;
+        margin-top: 10px;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+      }
+      .cta-button:hover {
+        transform: scale(1.1);
+      }
+      .block:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .certificate-section {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 200px));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .certificate-content {
+        background-color: white;
+        border-radius: 10px;
+        align-content: center;
+        text-align: center;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .certificate-content:hover {
+        transform: scale(1.1);
+      }
+      .certificate-content img {
+        width: 200px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <img src="../Images/nav.png" alt="" />
+        <div class="sidebar-content">
+          <h1>Erik Pádua<span style="font-size: x-small">.dev</span></h1>
+          <ul>
+            <li>
+              <h3>
+                <a href="#home">
+                  <img src="../Images/navPerson.png" alt="" />| Sobre</a
+                >
+              </h3>
+            </li>
+            <li>
+              <h3>
+                <a href="#projects">
+                  <img src="../Images/navProject.png" alt="" />| Projetos
+                </a>
+              </h3>
+            </li>
+            <li>
+              <h3>
+                <a href="#skills">
+                  <img src="../Images/navSkill.png" alt="" />| Habilidades</a
+                >
+              </h3>
+            </li>
+            <li>
+              <h3>
+                <a href="#certificate">
+                  <img src="../Images/navCertificate.png" alt="" />|
+                  Certificados</a
+                >
+              </h3>
+            </li>
+            <hr style="margin-top: 50px" />
+            <li class="contact">
+              <h3>
+                <a href="https://github.com/ErikPadua">
+                  <img src="../Images/github.png" alt=""
+                /></a>
+                <a href="https://www.linkedin.com/in/erikpadua/">
+                  <img src="../Images/linkedin.png" alt=""
+                /></a>
+                <a href="mailto:erikpadua76@gmail.com">
+                  <img src="../Images/email.png" alt=""
+                /></a>
+              </h3>
+            </li>
+          </ul>
+          <footer>&copy; 2024 - Erik Pádua</footer>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="first" id="home">
+          <h1>Sobre Mim</h1>
+        </div>
+        <div>
+          <div class="home-section">
+            <div class="home-content">
+              <img
+                src="https://media.licdn.com/dms/image/v2/D4E03AQFPKzwHVZR5Bg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1721412915254?e=1736380800&v=beta&t=2orFYwOzTsylata1mPNc5QxTY2DpS20LO9Wz18SZai4"
+                alt=""
+              />
+              <h1>
+                Erik O. Pádua
+                <h3>
+                  Desenvolvedor Back-End | TypeScript | NodeJs | AWS |
+                  Engenharia de Software | Acadêmico No Instituto Federal de
+                  Goiás (IFG) - Câmpus Inhumas
+                </h3>
+              </h1>
+
+              <p>
+                Olá, meu nome é Erik de Oliveira Pádua, e sou estudante de
+                Engenharia de Software. sou apaixonado por tecnologia e
+                desenvolvimento de soluções que fazem a diferença. Atualmente,
+                estou focado em aprimorar minhas habilidades na área de
+                desenvolvimento web, com um interesse especial em back-end.
+                Busco enfrentar desafios que me permitam crescer
+                profissionalmente e contribuir com projetos inovadores e de alto
+                impacto.
+              </p>
+              <a href="https://github.com/ErikPadua">
+                <img src="../Images/github.png" alt=""
+              /></a>
+              <a href="https://www.linkedin.com/in/erikpadua/">
+                <img src="../Images/linkedin.png" alt=""
+              /></a>
+              <a href="mailto:erikpadua76@gmail.com">
+                <img src="../Images/email.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="header"
+          id="projects"
+          style="background: linear-gradient(#333, #420249)"
+        >
+          <h1>Projetos</h1>
+        </div>
+
+        <div class="block-container">
+          <div class="block">
+            <h3>Pessoais</h3>
+            <p>
+              Nesta seção, estão as iniciativas que refletem minha criatividade
+              e paixão por aprender. Cada projeto é uma oportunidade de explorar
+              ideias e transformar desafios em realizações.
+            </p>
+            <a href="pessoal.html" class="cta-button">Ver Projetos</a>
+          </div>
+          <div class="block">
+            <h3>Acadêmicos</h3>
+            <p>
+              Nesta seção, apresento projetos desenvolvidos durante minha
+              trajetória acadêmica. Eles refletem aprendizado, aplicação prática
+              e dedicação em diversas áreas de estudo.
+            </p>
+            <a href="academico.html" class="cta-button">Ver Projetos</a>
+          </div>
+          <div class="block">
+            <h3>Back-End</h3>
+            <p>
+              Nesta seção, destaco projetos focados no desenvolvimento back-end,
+              envolvendo criação de APIs, integração de sistemas, gerenciamento
+              de dados, lógica de programação e bancos de dados.
+            </p>
+            <a href="./backend.html" class="cta-button">Ver Projetos</a>
+          </div>
+          <div class="block">
+            <h3>Front-End</h3>
+            <p>
+              Nesta seção, apresento projetos voltados ao desenvolvimento
+              front-end, com foco em interfaces intuitivas, responsividade e
+              experiências interativas.
+            </p>
+            <a href="frontend.html" class="cta-button">Ver Projetos</a>
+          </div>
+          <div class="block">
+            <h3>Machine Learning</h3>
+            <p>
+              Nesta seção, apresento projetos que exploram o poder da
+              inteligência artificial e do aprendizado de máquina.
+            </p>
+            <a href="machineLearning.html" class="cta-button">Ver Projetos</a>
+          </div>
+        </div>
+        <div class="header" id="skills" style="background: #420249">
+          <h1>Habilidades</h1>
+        </div>
+        <div class="block-container-skill">
+          <div class="block">
+            <h3>JavaScript</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/5968/5968292.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>TypeScript</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/5968/5968381.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>Git</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/15466/15466163.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>AWS</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/11378/11378728.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>Node.js</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/15484/15484303.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>SQL</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/5815/5815809.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>API REST</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/8605/8605634.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>TDD</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3335/3335359.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>Scrum</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/17656/17656642.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>HTML</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/888/888859.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>CSS</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/5968/5968242.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>Java</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/226/226777.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>Docker</h3>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/15466/15466088.png"
+              alt=""
+            />
+          </div>
+          <div class="block">
+            <h3>Postman</h3>
+            <img
+              src="https://avatars.slack-edge.com/2024-04-05/6934042159649_ac803d1cddbcbef8f110_512.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div
+          class="header"
+          id="certificate"
+          style="background: linear-gradient(#420249, #6956e5)"
+        >
+          <h1>Certificados</h1>
+        </div>
+        <div class="certificate-section">
+          <div class="certificate-content">
+            <a
+              href="https://drive.google.com/drive/folders/1_-EtqdJkWouH-QiDlBkh3NzcvbV2aCg1?usp=sharing"
+            >
+              <img src="../Images/googleDrive.png" alt=""
+            /></a>
+          </div>
+          <div class="certificate-content">
+            <a href="https://www.credly.com/users/erik-padua">
+              <img src="../Images/credly.png" alt=""
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
