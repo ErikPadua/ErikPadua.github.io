@@ -181,3 +181,45 @@ footer {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
+@media screen and (max-width: 768px) {
+  hr {
+    display: none;
+  }
+  .sidebar {
+    height: 40px;
+    width: 100%;
+    background: #333;
+    color: white;
+    transition: width 0.3s ease;
+    overflow: y;
+    position: fixed;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .sidebar:hover {
+    height: 400px;
+    width: 100%;
+    background: linear-gradient(#333, #420249, #6956e5);
+    border-radius: 0% 0% 2% 2%;
+  }
+  .sidebar-content ul {
+    list-style-type: none;
+  }
+  .sidebar-content ul li {
+    margin-bottom: 5px;
+  }
+  .sidebar-content a {
+    color: #fff;
+    display: inline;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+}
