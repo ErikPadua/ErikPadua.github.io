@@ -197,6 +197,12 @@ footer {
     display: block;
     margin-bottom: 20px;
   }
+  .sidebar:active {
+    height: 400px;
+    width: 100%;
+    background: linear-gradient(#333, #420249, #6956e5);
+    border-radius: 0% 0% 2% 2%;
+  }
   .sidebar:hover {
     height: 400px;
     width: 100%;
